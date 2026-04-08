@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOL | Promociones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame"></div>
+  <div class="comet blue"></div>
+  <div class="comet magenta"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">HOL</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="index.html">INICIO</a>
+      <a href="conocenos.html">CONÓCENOS</a>
+      <a href="membresias.html">MEMBRESÍAS</a>
+      <a href="promociones.html" class="active">PROMO</a>
+      <a href="contacto.html">CONTACTO</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section>
+      <h2>PROMOCIONES</h2>
+      <p>Accesos limitados para quienes actúan hoy.</p>
+      <div class="grid">
+        <div class="card">
+          <h3 style="color:var(--magenta)">-50% OFF</h3>
+          <p>Primer mes en membresía GOLD al inscribirte esta semana.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--blue)">NIGHT PASS</h3>
+          <p>Acceso especial nocturno por tiempo limitado.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
