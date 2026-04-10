@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOL | Conócenos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame"></div>
+  <div class="comet blue"></div>
+  <div class="comet magenta"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">HOL</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="index.html">INICIO</a>
+      <a href="conocenos.html" class="active">CONÓCENOS</a>
+      <a href="membresias.html">MEMBRESÍAS</a>
+      <a href="promociones.html">PROMO</a>
+      <a href="contacto.html">CONTACTO</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="reveal">
+      <h2>CONÓCENOS</h2>
+      <div class="hero-content">
+        <p class="subtitle">No somos un lugar. Somos una experiencia.</p>
+        <p>Creamos un espacio donde el juicio no existe y la libertad no se negocia. Un refugio diseñado para hombres que buscan más que rutina: buscan sentir, soltar, desafiarse.</p>
+        <p>Aquí, el respeto es ley… pero la intensidad es el idioma.</p>
+        <p>Cada rincón está pensado para despertar algo dentro de ti. No importa si vienes por curiosidad o convicción… lo que encuentres aquí depende de qué tan lejos estés dispuesto a ir contigo mismo.</p>
+        <p>No pedimos explicaciones. No damos etiquetas. Solo abrimos la puerta… tú decides hasta dónde cruzarla.</p>
+        <p class="accent-text">Este es tu territorio.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function toggleMenu() { document.getElementById('menu').classList.toggle('active'); }
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => { document.getElementById('menu').classList.remove('active'); });
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .card').forEach(el => {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
+    window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+  </script>
+</body>
+</html>

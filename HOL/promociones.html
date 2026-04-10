@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOL | Promociones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame"></div>
+  <div class="comet blue"></div>
+  <div class="comet magenta"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">HOL</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="index.html">INICIO</a>
+      <a href="conocenos.html">CONÓCENOS</a>
+      <a href="membresias.html">MEMBRESÍAS</a>
+      <a href="promociones.html" class="active">PROMO</a>
+      <a href="contacto.html">CONTACTO</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="reveal">
+      <h2>PROMOCIONES</h2>
+      <div class="hero-content">
+        <p class="subtitle">Las oportunidades aquí no se anuncian… se aprovechan.</p>
+        <p>Noches especiales donde lo inesperado ocurre. Accesos extendidos. Beneficios ocultos. Experiencias que solo algunos llegan a descubrir.</p>
+        <p>A veces es un detalle. A veces es una puerta que normalmente está cerrada. Pero siempre hay algo más… para quienes saben estar en el momento correcto.</p>
+        <p>Mantente atento. Aquí, lo mejor nunca es permanente.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3 style="color:var(--magenta)">EXCLUSIVA</h3>
+          <p>Consulta por nuestras puertas cerradas esta noche.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--blue)">LIMITADA</h3>
+          <p>Beneficios ocultos para miembros seleccionados.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function toggleMenu() { document.getElementById('menu').classList.toggle('active'); }
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => { document.getElementById('menu').classList.remove('active'); });
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .card').forEach(el => {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+        const rotateX = (y - rect.height / 2) / 20;
+        const rotateY = (rect.width / 2 - x) / 20;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+    window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+  </script>
+</body>
+</html>

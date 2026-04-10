@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOL | Inicio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame"></div>
+  <div class="comet blue"></div>
+  <div class="comet magenta"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">HOL</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="index.html" class="active">INICIO</a>
+      <a href="conocenos.html">CONÓCENOS</a>
+      <a href="membresias.html">MEMBRESÍAS</a>
+      <a href="promociones.html">PROMO</a>
+      <a href="contacto.html">CONTACTO</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="reveal">
+      <h1>HOL</h1>
+      <p class="subtitle">Bienvenido a un territorio donde las reglas se doblan… y los límites se olvidan.</p>
+      <div class="hero-content">
+        <p>Aquí, cada hombre que cruza la puerta deja de ser uno más para convertirse en el centro de todo. No vienes a encajar. Vienes a dominar tu momento, a reconectar con esa parte de ti que el mundo afuera te obligó a esconder.</p>
+        <p>Este no es un lugar para los tibios. Es para quienes saben que dentro hay algo más… algo intenso, indomable, real.</p>
+        <p>Luces bajas. Ambiente cargado. Miradas que dicen más de lo que deberían. Aquí, tu presencia pesa. Tu energía manda.</p>
+        <p>Si estás listo para explorar tu lado más auténtico… ya sabes dónde estás.</p>
+      </div>
+      <a href="conocenos.html" class="cta">DESCUBRIR</a>
+    </section>
+  </main>
+
+  <script>
+    // Menu Toggle Functionality
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('active');
+    }
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('active');
+      });
+    });
+
+    // Reveal Animations on Scroll
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal, .card').forEach(el => {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
+
+    // Premium Mouse Tracking for Cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+        const rotateX = (y - rect.height / 2) / 20;
+        const rotateY = (rect.width / 2 - x) / 20;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+
+    // Smooth Page Transitions
+    window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+  </script>
+</body>
+</html>

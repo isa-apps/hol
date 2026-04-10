@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOL | Contacto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame"></div>
+  <div class="comet blue"></div>
+  <div class="comet magenta"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">HOL</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="index.html">INICIO</a>
+      <a href="conocenos.html">CONÓCENOS</a>
+      <a href="membresias.html">MEMBRESÍAS</a>
+      <a href="promociones.html">PROMO</a>
+      <a href="contacto.html" class="active">CONTACTO</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="reveal">
+      <h2>CONTACTO</h2>
+      <div class="hero-content">
+        <p class="subtitle">Si llegaste hasta aquí… ya diste el primer paso.</p>
+        <p>El siguiente es simple: acércate.</p>
+        <p>Ubicación reservada. Atención discreta. Respuesta directa.</p>
+        <p>No necesitas explicar mucho. Sabemos lo que buscas… incluso antes de que lo digas.</p>
+        <p>Atrévete a escribir. Atrévete a aparecer.</p>
+        <p class="accent-text">Porque hay experiencias que no se cuentan… se viven.</p>
+      </div>
+      
+      <form id="contactForm">
+        <input type="text" placeholder="NOMBRE COMPLETO" required>
+        <input type="email" placeholder="EMAIL" required>
+        <textarea placeholder="TU MENSAJE"></textarea>
+        <button type="submit" class="cta">ENVIAR</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 HOL. TODOS LOS DERECHOS RESERVADOS.
+  </footer>
+
+  <script>
+    function toggleMenu() { document.getElementById('menu').classList.toggle('active'); }
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => { document.getElementById('menu').classList.remove('active'); });
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .card').forEach(el => {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = 'ENVIANDO...';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.innerText = 'MENSAJE ENVIADO';
+          btn.style.background = 'var(--blue)';
+          contactForm.reset();
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.background = 'transparent';
+            btn.disabled = false;
+          }, 3000);
+        }, 1500);
+      });
+    }
+    window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+  </script>
+</body>
+</html>
